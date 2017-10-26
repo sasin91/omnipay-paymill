@@ -1,0 +1,28 @@
+{
+  "name": "sasin91/omnipay-paymill",
+  "description": "Paymill driver for thephpleague/omnipay",
+  "type": "library",
+  "require": {
+    "omnipay/common": "dev-master"
+  },
+  "require-dev": {
+    "omnipay/tests": "dev-master"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jonas kervin Hansen",
+      "email": "jonas.kerwin.hansen@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "files": [
+      "src/helpers.php"
+    ],
+    "psr-4": {
+      "Omnipay\\Paymill\\": "src/",
+      "Omnipay\\Paymill\\Tests\\": "tests/"
+    }
+  }
+}
