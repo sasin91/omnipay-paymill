@@ -3,7 +3,7 @@
 namespace Omnipay\Paymill\Tests;
 
 use GuzzleHttp\Psr7\Response;
-use Omnipay\Paymill\PaymillGateway;
+use Omnipay\Paymill\Gateway as PaymillGateway;
 use Omnipay\Paymill\Requests\Authorize;
 use Omnipay\Paymill\Requests\Payment;
 use Omnipay\Paymill\Requests\Refund;

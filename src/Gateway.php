@@ -10,7 +10,7 @@ use Omnipay\Paymill\Requests\Payment;
 use Omnipay\Paymill\Requests\Refund;
 use Omnipay\Paymill\Requests\Transaction;
 
-class PaymillGateway extends AbstractGateway
+class Gateway extends AbstractGateway
 {
 	/**
 	 * @var string
