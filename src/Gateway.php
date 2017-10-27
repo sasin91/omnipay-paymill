@@ -27,9 +27,9 @@ class Gateway extends AbstractGateway
 
 	/**
 	 * @param string $token
-	 * @return PaymillGateway
+	 * @return Gateway
 	 */
-	public function setToken(string $token): PaymillGateway
+	public function setToken(string $token): Gateway
 	{
 		$this->token = $token;
 		return $this;
