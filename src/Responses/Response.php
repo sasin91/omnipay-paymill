@@ -29,6 +29,20 @@ class Response extends AbstractResponse
 	}
 
 	/**
+	 * Response message
+	 *
+	 * @return null|string A response message from the payment gateway
+	 */
+	public function getMessage():?string
+	{
+		if ($this->isSuccessful()) {
+			return Arr::get($this->data, 'message');
+		}
+
+		return Arr::get($this->data, 'error');
+	}
+
+	/**
 	 * Gateway Reference
 	 *
 	 * @return null|string A reference provided by the gateway to represent this transaction
