@@ -6,7 +6,6 @@ namespace Omnipay\Paymill\Responses;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Paymill\Support\Arr;
 use function implode;
-use function is_array;
 
 class Response extends AbstractResponse
 {
@@ -63,6 +62,16 @@ class Response extends AbstractResponse
 	 */
 	private function parseMessages($messages): string
 	{
-		return implode(', ', is_array($messages) ? $messages : [$messages]);
+		$messages = Arr::wrap($messages);
+
+		if (in_array('messages', $messages)) {
+			return sprintf(
+				'%s: %s',
+				Arr::get($messages, 'field', ''),
+				implode(', ', Arr::get($messages, 'messages'))
+			);
+		}
+
+		return implode(', ', $messages);
 	}
 }
