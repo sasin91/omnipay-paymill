@@ -5,7 +5,7 @@ namespace Omnipay\Paymill\Responses;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Paymill\Support\Arr;
-use function implode;
+use Omnipay\Paymill\Support\ResponseCode;
 
 class Response extends AbstractResponse
 {
@@ -16,7 +16,7 @@ class Response extends AbstractResponse
 	 */
 	public function isSuccessful(): bool
 	{
-		return $this->getCode() === "20000";
+		return ResponseCode::isSuccessful($this->getCode());
 	}
 
 	/**
@@ -26,7 +26,15 @@ class Response extends AbstractResponse
 	 */
 	public function getCode():?string
 	{
-		return Arr::get($this->data, 'response_code', null);
+		return Arr::first($this->data, function ($value, $key) {
+			if ($key === 'response_code') {
+				return $value;
+			}
+
+			return Arr::get(
+				Arr::wrap($value), 'response_code'
+			);
+		});
 	}
 
 	/**
