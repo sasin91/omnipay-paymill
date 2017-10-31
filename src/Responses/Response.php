@@ -5,6 +5,8 @@ namespace Omnipay\Paymill\Responses;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Paymill\Support\Arr;
+use function implode;
+use function is_array;
 
 class Response extends AbstractResponse
 {
@@ -35,11 +37,11 @@ class Response extends AbstractResponse
 	 */
 	public function getMessage():?string
 	{
-		if ($this->isSuccessful()) {
-			return Arr::get($this->data, 'message');
-		}
+		$messages = ($this->isSuccessful())
+			? Arr::get($this->data, 'messages', [])
+			: Arr::get($this->data, 'error.messages', []);
 
-		return Arr::get($this->data, 'error');
+		return $this->parseMessages($messages);
 	}
 
 	/**
@@ -50,5 +52,17 @@ class Response extends AbstractResponse
 	public function getTransactionReference():?string
 	{
 		return Arr::get($this->data, 'id', null);
+	}
+
+	/**
+	 * Parse gateway messages into a string.
+	 *
+	 * @param array|string $messages
+	 *
+	 * @return string
+	 */
+	private function parseMessages($messages): string
+	{
+		return implode(', ', is_array($messages) ? $messages : [$messages]);
 	}
 }
