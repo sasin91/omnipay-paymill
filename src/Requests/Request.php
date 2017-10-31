@@ -78,8 +78,8 @@ abstract class Request extends AbstractRequest
 		$response = $this->httpClient->send(
 			$this->httpMethod(),
 			$this->url(),
-			[],
-			\GuzzleHttp\json_encode($data)
+			['Content-Type' => 'application/x-www-form-urlencoded'],
+			$data
 		);
 
 		$contents = $response->getBody()->getContents();
