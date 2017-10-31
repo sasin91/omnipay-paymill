@@ -15,15 +15,6 @@ abstract class Request extends AbstractRequest
 	protected $endpoint = 'https://api.paymill.com/v2.1';
 
 	/**
-	 * @param string $value
-	 * @return AbstractRequest
-	 */
-	public function setApiKey(string $value)
-	{
-		return $this->setParameter('apiKey', $value);
-	}
-
-	/**
 	 * Pull a single parameter.
 	 *
 	 * @param string $key
@@ -87,7 +78,7 @@ abstract class Request extends AbstractRequest
 		$response = $this->httpClient->send(
 			$this->httpMethod(),
 			$this->url(),
-			['Authorization' => 'Basic ' . base64_encode($this->getApiKey() . ':')],
+			[],
 			\GuzzleHttp\json_encode($data)
 		);
 
@@ -126,12 +117,4 @@ abstract class Request extends AbstractRequest
 	 * @return string
 	 */
 	public abstract function resource(): string;
-
-	/**
-	 * @return string
-	 */
-	public function getApiKey()
-	{
-		return $this->getParameter('apiKey');
-	}
 }

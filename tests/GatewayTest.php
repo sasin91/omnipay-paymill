@@ -117,6 +117,5 @@ class GatewayTest extends GatewayTestCase
 		parent::setUp();
 
 		$this->gateway = new PaymillGateway($this->getHttpClient(), $this->getHttpRequest());
-		$this->gateway->setApiKey('fake-api-key');
 	}
 }

@@ -68,29 +68,8 @@ class Gateway extends AbstractGateway
 	public function getDefaultParameters()
 	{
 		return [
-			'apiKey' => '',
+			//
 		];
-	}
-
-	/**
-	 * Get the gateway secret api key
-	 *
-	 * @return string
-	 */
-	public function getApiKey()
-	{
-		return $this->getParameter('apiKey');
-	}
-
-	/**
-	 * Set the gateway secret api key
-	 *
-	 * @param $value
-	 * @return $this
-	 */
-	public function setApiKey($value)
-	{
-		return $this->setParameter('apiKey', $value);
 	}
 
 	/**
