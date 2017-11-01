@@ -10,6 +10,16 @@ use Omnipay\Paymill\Support\ResponseCode;
 class Response extends AbstractResponse
 {
 	/**
+	 * Get the response data.
+	 *
+	 * @return array
+	 */
+	public function getData()
+	{
+		return Arr::get($this->data, 'data', $this->data);
+	}
+
+	/**
 	 * Is the response successful?
 	 *
 	 * @return boolean

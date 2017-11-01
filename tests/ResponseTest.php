@@ -73,4 +73,21 @@ class ResponseTest extends TestCase
 
 		$this->assertSame('everything is fine, move along.', $response->getMessage());
 	}
+
+	/** @test */
+	function it_extracts_nested_data()
+	{
+		$response = new Response(
+			$this->getMockRequest(),
+			[
+				'response_code' => ResponseCode::OK,
+
+				'data' => [
+					'amount' => 4200,
+				]
+			]
+		);
+
+		$this->assertEquals(['amount' => 4200], $response->getData());
+	}
 }
