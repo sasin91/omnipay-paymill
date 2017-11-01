@@ -26,15 +26,9 @@ class Response extends AbstractResponse
 	 */
 	public function getCode():?string
 	{
-		return Arr::first($this->data, function ($value, $key) {
-			if ($key === 'response_code') {
-				return $value;
-			}
-
-			return Arr::get(
-				Arr::wrap($value), 'response_code'
-			);
-		});
+		return Arr::first(
+			Arr::pluck($this->data, 'response_code')
+		);
 	}
 
 	/**
@@ -46,7 +40,7 @@ class Response extends AbstractResponse
 	{
 		$messages = ($this->isSuccessful())
 			? Arr::get($this->data, 'messages', [])
-			: Arr::get($this->data, 'error.messages', []);
+			: Arr::get($this->data, 'error', []);
 
 		return $this->parseMessages($messages);
 	}
@@ -72,7 +66,7 @@ class Response extends AbstractResponse
 	{
 		$messages = Arr::wrap($messages);
 
-		if (in_array('messages', $messages)) {
+		if (array_key_exists('messages', $messages)) {
 			return sprintf(
 				'%s: %s',
 				Arr::get($messages, 'field', ''),

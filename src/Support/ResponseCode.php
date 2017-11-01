@@ -13,7 +13,7 @@ class ResponseCode
 	const WITHHELD_DUE_NEW_MERCHANT = "20100";
 	const WITHHELD = "20101";
 
-	public static function isSuccessful(int $code): bool
+	public static function isSuccessful($code): bool
 	{
 		return $code === static::OK
 			|| $code === static::WITHHELD

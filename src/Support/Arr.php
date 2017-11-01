@@ -37,6 +37,32 @@ class Arr
 	}
 
 	/**
+	 * Pluck an array of values from an array.
+	 *
+	 * @param  array  $array
+	 * @param  string|array  $key
+	 * @return array
+	 */
+	public static function pluck($array, $key)
+	{
+		if (! $key) {
+			return [];
+		}
+
+		$results = [];
+
+		if ($found_in_top = static::get($array, $key)) {
+			$results[] = $found_in_top;
+		}
+
+		foreach ($array as $item) {
+			$results[] = static::get(static::wrap($item), $key);
+		}
+
+		return $results;
+	}
+
+	/**
 	 * Get an item from an array using "dot" notation.
 	 *
 	 * @param  \ArrayAccess|array $array
