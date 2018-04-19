@@ -75,7 +75,7 @@ abstract class Request extends AbstractRequest
 	 */
 	public function sendData($data): ResponseInterface
 	{
-		$response = $this->httpClient->send(
+		$response = $this->httpClient->request(
 			$this->httpMethod(),
 			$this->url(),
 			['Content-Type' => 'application/x-www-form-urlencoded'],
