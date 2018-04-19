@@ -79,7 +79,7 @@ abstract class Request extends AbstractRequest
 			$this->httpMethod(),
 			$this->url(),
 			['Content-Type' => 'application/x-www-form-urlencoded'],
-			json_encode($data)
+			http_build_query($data)
 		);
 
 		$contents = $response->getBody()->getContents();
